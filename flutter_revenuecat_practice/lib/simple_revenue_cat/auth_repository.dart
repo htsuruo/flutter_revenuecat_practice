@@ -28,4 +28,6 @@ class AuthRepository {
       return null;
     }
   }
+
+  Future<void> signOut() => _auth.signOut();
 }
