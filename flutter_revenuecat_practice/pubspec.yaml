@@ -30,6 +30,8 @@ dependencies:
   cupertino_icons:
   flutter:
     sdk: flutter
+  flutter_riverpod: 1.0.0-dev.7
+  simple_logger:
   tsuruo_kit:
     git:
       url: https://github.com/HTsuruo/flutter_tsuruo_kit.git
