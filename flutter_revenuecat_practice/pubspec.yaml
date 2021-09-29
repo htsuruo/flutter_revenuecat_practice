@@ -27,7 +27,10 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cloud_firestore:
   cupertino_icons:
+  firebase_auth:
+  firebase_core:
   flutter:
     sdk: flutter
   flutter_riverpod: 1.0.0-dev.7
