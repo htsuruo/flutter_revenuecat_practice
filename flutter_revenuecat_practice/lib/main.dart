@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_revenuecat_practice/app.dart';
@@ -6,7 +8,9 @@ import 'package:simple_logger/simple_logger.dart';
 
 import 'logger.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   logger.setLevel(Level.FINE, includeCallerInfo: kDebugMode);
   runApp(
     const ProviderScope(
