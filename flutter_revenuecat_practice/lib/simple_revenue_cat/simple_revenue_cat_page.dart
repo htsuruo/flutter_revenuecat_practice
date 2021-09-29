@@ -19,7 +19,7 @@ class SimpleRevenueCatPage extends ConsumerWidget {
           onPressed: () async {
             final userCredential =
                 await ref.read(authRepository).signInWithGoogle();
-            logger.fine(userCredential?.user?.displayName);
+            logger.fine(userCredential?.user?.uid);
           },
           child: const Text('Google Sign in'),
         ),
