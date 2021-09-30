@@ -41,16 +41,21 @@ class SimpleRevenueCatPage extends ConsumerWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if (user == null)
+                    OutlinedButton(
+                      onPressed: () async {
+                        final userCredential = await ref
+                            .read(progressController)
+                            .executeWithProgress(
+                              () => ref.read(authRepository).signInWithGoogle(),
+                            );
+                        logger.fine(userCredential?.user?.uid);
+                      },
+                      child: const Text('Google Sign in'),
+                    ),
                   OutlinedButton(
-                    onPressed: () async {
-                      final userCredential = await ref
-                          .read(progressController)
-                          .executeWithProgress(
-                            () => ref.read(authRepository).signInWithGoogle(),
-                          );
-                      logger.fine(userCredential?.user?.uid);
-                    },
-                    child: const Text('Google Sign in'),
+                    onPressed: () {},
+                    child: const Text('HOGE'),
                   ),
                 ],
               ),
