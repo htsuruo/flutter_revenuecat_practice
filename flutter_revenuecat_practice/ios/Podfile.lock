@@ -82,6 +82,14 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - Purchases (3.12.3):
+    - PurchasesCoreSwift (= 3.12.3)
+  - purchases_flutter (3.4.5):
+    - Flutter
+    - PurchasesHybridCommon (= 1.9.1)
+  - PurchasesCoreSwift (3.12.3)
+  - PurchasesHybridCommon (1.9.1):
+    - Purchases (= 3.12.3)
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -90,6 +98,7 @@ DEPENDENCIES:
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `8.7.0`)
   - Flutter (from `Flutter`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
+  - purchases_flutter (from `.symlinks/plugins/purchases_flutter/ios`)
 
 SPEC REPOS:
   trunk:
@@ -105,6 +114,9 @@ SPEC REPOS:
     - GTMSessionFetcher
     - nanopb
     - PromisesObjC
+    - Purchases
+    - PurchasesCoreSwift
+    - PurchasesHybridCommon
 
 EXTERNAL SOURCES:
   cloud_firestore:
@@ -120,6 +132,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   google_sign_in:
     :path: ".symlinks/plugins/google_sign_in/ios"
+  purchases_flutter:
+    :path: ".symlinks/plugins/purchases_flutter/ios"
 
 CHECKOUT OPTIONS:
   FirebaseFirestore:
@@ -145,6 +159,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  Purchases: e9839517aea4335136f3946ae228eecf5131cc25
+  purchases_flutter: ff55c9a04b918dd20d20030d5b5f5a5859c28cb9
+  PurchasesCoreSwift: dd3fd55a9895abd7906a3842bd36c7f7539a99d1
+  PurchasesHybridCommon: 1d98dd58935a4fa1009c6e17f8b740973147b899
 
 PODFILE CHECKSUM: c760068bf6c2e5a86b51c49bc749d4dee55383e3
 

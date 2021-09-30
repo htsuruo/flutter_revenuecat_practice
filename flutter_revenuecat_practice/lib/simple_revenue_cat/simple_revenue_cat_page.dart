@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_revenuecat_practice/logger.dart';
 import 'package:flutter_revenuecat_practice/simple_revenue_cat/auth_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 import 'authenticator.dart';
@@ -53,10 +55,16 @@ class SimpleRevenueCatPage extends ConsumerWidget {
                       },
                       child: const Text('Google Sign in'),
                     ),
-                  OutlinedButton(
-                    onPressed: () {},
-                    child: const Text('HOGE'),
-                  ),
+                  if (user != null)
+                    OutlinedButton(
+                      onPressed: () async {
+                        final purchaserInfo =
+                            await Purchases.getPurchaserInfo();
+                        final offerings = await Purchases.getOfferings();
+                        await Purchases.purchaseProduct('test_product_id');
+                      },
+                      child: const Text('HOGE'),
+                    ),
                 ],
               ),
             ),
