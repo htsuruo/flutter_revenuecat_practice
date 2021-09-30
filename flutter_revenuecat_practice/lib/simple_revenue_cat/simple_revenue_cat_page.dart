@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_revenuecat_practice/logger.dart';
 import 'package:flutter_revenuecat_practice/simple_revenue_cat/auth_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 import 'authenticator.dart';
 
@@ -42,8 +43,11 @@ class SimpleRevenueCatPage extends ConsumerWidget {
                 children: [
                   OutlinedButton(
                     onPressed: () async {
-                      final userCredential =
-                          await ref.read(authRepository).signInWithGoogle();
+                      final userCredential = await ref
+                          .read(progressController)
+                          .executeWithProgress(
+                            () => ref.read(authRepository).signInWithGoogle(),
+                          );
                       logger.fine(userCredential?.user?.uid);
                     },
                     child: const Text('Google Sign in'),
