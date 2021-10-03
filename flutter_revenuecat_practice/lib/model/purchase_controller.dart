@@ -28,6 +28,9 @@ class PurchaseController extends StateNotifier<PurchaseState>
     // リスナーも提供されている
     Purchases.addPurchaserInfoUpdateListener((purchaserInfo) {
       logger.info('purchaserInfo: $purchaserInfo');
+      state = state.copyWith(
+        purchaserInfo: purchaserInfo,
+      );
     });
 
     subscriptionHolder.add(
@@ -45,6 +48,9 @@ class PurchaseController extends StateNotifier<PurchaseState>
         },
       ),
     );
+
+    Future<void> purchaseProduct(String productId) =>
+        Purchases.purchaseProduct(productId);
   }
   final Reader _read;
   static const _productIdentifiers = [''];

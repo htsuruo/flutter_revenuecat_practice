@@ -60,9 +60,6 @@ class SimpleRevenueCatPage extends ConsumerWidget {
                   if (user != null)
                     OutlinedButton(
                       onPressed: () async {
-                        final purchaserInfo =
-                            await Purchases.getPurchaserInfo();
-                        final offerings = await Purchases.getOfferings();
                         await Purchases.purchaseProduct('test_product_id');
                       },
                       child: const Text('HOGE'),

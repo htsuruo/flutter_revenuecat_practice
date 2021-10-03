@@ -14,8 +14,17 @@ Future<void> main() async {
   await Firebase.initializeApp();
   logger.setLevel(Level.FINE, includeCallerInfo: kDebugMode);
 
+  const apiKey = String.fromEnvironment('API_KEY');
+  if (apiKey.isEmpty) {
+    const message = 'You must set api key by `--dart-define=API_KEY=xxx`';
+    logger.warning(message);
+    return runApp(
+      const _InvalidDartDefine(message: message),
+    );
+  }
+
   // API Keyでセットアップ
-  await Purchases.setup('xxx');
+  await Purchases.setup(apiKey);
   // RevenueCat SDKのログ表示
   await Purchases.setDebugLogsEnabled(kDebugMode);
   runApp(
@@ -23,4 +32,24 @@ Future<void> main() async {
       child: App(),
     ),
   );
+}
+
+class _InvalidDartDefine extends StatelessWidget {
+  const _InvalidDartDefine({
+    Key? key,
+    required this.message,
+  }) : super(key: key);
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text(message),
+        ),
+      ),
+    );
+  }
 }
