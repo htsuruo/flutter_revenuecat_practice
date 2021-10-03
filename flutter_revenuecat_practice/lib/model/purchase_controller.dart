@@ -14,8 +14,15 @@ class PurchaseController extends StateNotifier<PurchaseState>
     with SubscriptionHolderMixin {
   PurchaseController(this._read) : super(const PurchaseState()) {
     Future(() async {
-      final products = await Purchases.getProducts(_productIdentifiers);
+      final products = await Purchases.getProducts(
+        _productIdentifiers,
+        type: PurchaseType.inapp,
+      );
+      // final sub = await Purchases.getProducts(
+      //   _productIdentifiers,
+      // );
       final offerings = await Purchases.getOfferings();
+      logger.fine(offerings.current?.monthly?.product.priceString);
       // TODO(tsuruoka): `paymentDiscount`は何のことかまだ良くわからず
       // final paymentDiscount =
       //     await Purchases.getPaymentDiscount(_productIdentifiers);
@@ -53,5 +60,11 @@ class PurchaseController extends StateNotifier<PurchaseState>
         Purchases.purchaseProduct(productId);
   }
   final Reader _read;
-  static const _productIdentifiers = [''];
+  static const _productIdentifiers = [
+    // 'test_monthly_sliver',
+    // 'test_annual_sliver',
+    // 'test_monthly_gold',
+    // 'test_annual_gold',
+    'jp.mytrade.dev.noads',
+  ];
 }
