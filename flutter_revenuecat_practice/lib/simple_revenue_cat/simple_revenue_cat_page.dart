@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_revenuecat_practice/logger.dart';
+import 'package:flutter_revenuecat_practice/model/purchase_controller.dart';
 import 'package:flutter_revenuecat_practice/simple_revenue_cat/auth_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -18,6 +19,7 @@ class SimpleRevenueCatPage extends ConsumerWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final user = ref.watch(authenticator);
+    final purchase = ref.watch(purchaseStateProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('RevenueCat Demo'),

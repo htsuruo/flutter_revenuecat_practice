@@ -14,11 +14,10 @@ Future<void> main() async {
   await Firebase.initializeApp();
   logger.setLevel(Level.FINE, includeCallerInfo: kDebugMode);
 
-  // RevenueCat SDKのログ表示
-  await Purchases.setDebugLogsEnabled(kDebugMode);
-
   // API Keyでセットアップ
   await Purchases.setup('xxx');
+  // RevenueCat SDKのログ表示
+  await Purchases.setDebugLogsEnabled(kDebugMode);
   runApp(
     const ProviderScope(
       child: App(),
