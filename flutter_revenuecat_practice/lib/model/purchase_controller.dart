@@ -1,6 +1,6 @@
 import 'package:flutter_revenuecat_practice/logger.dart';
+import 'package:flutter_revenuecat_practice/model/authenticator.dart';
 import 'package:flutter_revenuecat_practice/model/purchase_state.dart';
-import 'package:flutter_revenuecat_practice/simple_revenue_cat/authenticator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:subscription_holder/subscription_holder.dart';

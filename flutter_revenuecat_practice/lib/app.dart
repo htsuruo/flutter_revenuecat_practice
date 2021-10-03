@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_revenuecat_practice/simple_revenue_cat/simple_revenue_cat.dart';
+import 'package:flutter_revenuecat_practice/simple_purchase_page.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 // final _routes = <String, WidgetBuilder>{
@@ -18,7 +18,7 @@ class App extends StatelessWidget {
         colorScheme: const ColorScheme.light(),
       ),
       home: const ProgressHUD(
-        child: SimpleRevenueCatPage(),
+        child: SimplePurchasePage(),
       ),
     );
   }
