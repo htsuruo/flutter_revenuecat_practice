@@ -42,8 +42,10 @@ dependencies:
       url: https://github.com/HTsuruo/flutter_tsuruo_kit.git
 
 dev_dependencies:
+  build_runner:
   flutter_test:
     sdk: flutter
+  freezed:
   pedantic_mono:
 
 # For information on the generic Dart part of this file, see the
