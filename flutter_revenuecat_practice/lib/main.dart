@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_revenuecat_practice/app.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:simple_logger/simple_logger.dart';
 
@@ -22,6 +23,9 @@ Future<void> main() async {
       const _InvalidDartDefine(message: message),
     );
   }
+
+  // DateTimeのdefaultLocaleをJapaneseに
+  Intl.defaultLocale = 'ja';
 
   // RevenueCat SDKのログ表示(ドキュメント見るとsetupより先に呼んでいる）
   await Purchases.setDebugLogsEnabled(kDebugMode);

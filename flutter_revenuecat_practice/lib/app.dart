@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_revenuecat_practice/scaffold_messanger_provider.dart';
 import 'package:flutter_revenuecat_practice/simple_purchase_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,6 +26,14 @@ class App extends ConsumerWidget {
           behavior: SnackBarBehavior.floating,
         ),
       ),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ja'),
+      ],
       home: const ProgressHUD(
         child: SimplePurchasePage(),
       ),

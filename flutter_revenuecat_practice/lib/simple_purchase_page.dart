@@ -73,6 +73,8 @@ class _UserInfo extends ConsumerWidget {
         ) ??
         0;
     final uid = ref.watch(userProvider.select((s) => s.user?.uid));
+    final activeEntitlements =
+        ref.watch(userProvider.select((s) => s.activeEntitlements));
     return Container(
       width: double.infinity,
       color: colorScheme.primary.withOpacity(.2),
@@ -84,6 +86,34 @@ class _UserInfo extends ConsumerWidget {
               children: [
                 Text('uid: $uid'),
                 Text('Purchased Count: $purchaserInfo'),
+                ...activeEntitlements
+                    .map(
+                      (e) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              e.identifier,
+                              style: theme.textTheme.caption!.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: colorScheme.primary,
+                              ),
+                            ),
+                            Text(
+                              '期間: ${e.periodType.described},'
+                              '期限: ${e.expirationDate},'
+                              '更新: ${e.willRenew},'
+                              '最終更新日: ${e.latestPurchaseDate},',
+                              style: theme.textTheme.caption!.copyWith(
+                                color: colorScheme.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                    .toList(),
               ],
             ),
     );

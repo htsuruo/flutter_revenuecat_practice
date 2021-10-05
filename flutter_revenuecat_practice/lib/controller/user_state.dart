@@ -12,6 +12,15 @@ class UserState with _$UserState {
   }) = _UserState;
   UserState._();
 
+  late final List<EntitlementInfo> activeEntitlements =
+      purchaserInfo?.entitlements.active.entries.map((e) => e.value).toList() ??
+          [];
+
+  // 複数のPackagesのうちいずれか一つでも購入/購読している状態
   late final bool isPaidUser =
-      purchaserInfo?.allPurchasedProductIdentifiers.isNotEmpty ?? false;
+      purchaserInfo?.entitlements.active.isNotEmpty ?? false;
+
+  // Entitlements`NoAds`を購入した状態
+  late final bool isNoAdsUser =
+      purchaserInfo?.entitlements.all['NoAds']?.isActive ?? false;
 }
