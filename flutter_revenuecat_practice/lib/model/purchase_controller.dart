@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_revenuecat_practice/logger.dart';
-import 'package:flutter_revenuecat_practice/model/authenticator.dart';
 import 'package:flutter_revenuecat_practice/model/purchase_state.dart';
+import 'package:flutter_revenuecat_practice/model/user_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:subscription_holder/subscription_holder.dart';
@@ -32,32 +32,15 @@ class PurchaseController extends StateNotifier<PurchaseState>
     });
 
     // リスナーも提供されている
-    Purchases.addPurchaserInfoUpdateListener((purchaserInfo) {
-      logger.info('purchaserInfo: $purchaserInfo');
-      state = state.copyWith(
-        purchaserInfo: purchaserInfo,
-      );
-    });
-
-    subscriptionHolder.add(
-      _read(authStateChanges.stream).listen(
-        (user) async {
-          if (user == null) {
-            logger.info('logout');
-            return;
-          }
-          // RevenueCatのAppUserIDをセット
-          final loginResult = await Purchases.logIn(user.uid);
-          state = state.copyWith(
-            purchaserInfo: loginResult.purchaserInfo,
-          );
-        },
-      ),
+    Purchases.addPurchaserInfoUpdateListener(
+      (purchaserInfo) {
+        logger.info('purchaserInfo: $purchaserInfo');
+        _read(userProvider.notifier).updatePurchaseInfo(purchaserInfo);
+      },
     );
   }
 
   final Reader _read;
-
   Future<PlatformException?> purchaseProduct(String productId) async {
     try {
       await Purchases.purchaseProduct(productId);

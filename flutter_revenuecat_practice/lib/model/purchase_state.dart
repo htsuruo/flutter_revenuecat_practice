@@ -6,7 +6,6 @@ part 'purchase_state.freezed.dart';
 @freezed
 class PurchaseState with _$PurchaseState {
   factory PurchaseState({
-    PurchaserInfo? purchaserInfo,
     Offerings? offerings,
   }) = _PurchaseState;
   PurchaseState._();

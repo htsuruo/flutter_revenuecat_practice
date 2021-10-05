@@ -17,9 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PurchaseStateTearOff {
   const _$PurchaseStateTearOff();
 
-  _PurchaseState call({PurchaserInfo? purchaserInfo, Offerings? offerings}) {
+  _PurchaseState call({Offerings? offerings}) {
     return _PurchaseState(
-      purchaserInfo: purchaserInfo,
       offerings: offerings,
     );
   }
@@ -30,7 +29,6 @@ const $PurchaseState = _$PurchaseStateTearOff();
 
 /// @nodoc
 mixin _$PurchaseState {
-  PurchaserInfo? get purchaserInfo => throw _privateConstructorUsedError;
   Offerings? get offerings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -43,7 +41,7 @@ abstract class $PurchaseStateCopyWith<$Res> {
   factory $PurchaseStateCopyWith(
           PurchaseState value, $Res Function(PurchaseState) then) =
       _$PurchaseStateCopyWithImpl<$Res>;
-  $Res call({PurchaserInfo? purchaserInfo, Offerings? offerings});
+  $Res call({Offerings? offerings});
 }
 
 /// @nodoc
@@ -57,14 +55,9 @@ class _$PurchaseStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? purchaserInfo = freezed,
     Object? offerings = freezed,
   }) {
     return _then(_value.copyWith(
-      purchaserInfo: purchaserInfo == freezed
-          ? _value.purchaserInfo
-          : purchaserInfo // ignore: cast_nullable_to_non_nullable
-              as PurchaserInfo?,
       offerings: offerings == freezed
           ? _value.offerings
           : offerings // ignore: cast_nullable_to_non_nullable
@@ -80,7 +73,7 @@ abstract class _$PurchaseStateCopyWith<$Res>
           _PurchaseState value, $Res Function(_PurchaseState) then) =
       __$PurchaseStateCopyWithImpl<$Res>;
   @override
-  $Res call({PurchaserInfo? purchaserInfo, Offerings? offerings});
+  $Res call({Offerings? offerings});
 }
 
 /// @nodoc
@@ -96,14 +89,9 @@ class __$PurchaseStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? purchaserInfo = freezed,
     Object? offerings = freezed,
   }) {
     return _then(_PurchaseState(
-      purchaserInfo: purchaserInfo == freezed
-          ? _value.purchaserInfo
-          : purchaserInfo // ignore: cast_nullable_to_non_nullable
-              as PurchaserInfo?,
       offerings: offerings == freezed
           ? _value.offerings
           : offerings // ignore: cast_nullable_to_non_nullable
@@ -115,25 +103,20 @@ class __$PurchaseStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PurchaseState extends _PurchaseState {
-  _$_PurchaseState({this.purchaserInfo, this.offerings}) : super._();
+  _$_PurchaseState({this.offerings}) : super._();
 
-  @override
-  final PurchaserInfo? purchaserInfo;
   @override
   final Offerings? offerings;
 
   @override
   String toString() {
-    return 'PurchaseState(purchaserInfo: $purchaserInfo, offerings: $offerings)';
+    return 'PurchaseState(offerings: $offerings)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _PurchaseState &&
-            (identical(other.purchaserInfo, purchaserInfo) ||
-                const DeepCollectionEquality()
-                    .equals(other.purchaserInfo, purchaserInfo)) &&
             (identical(other.offerings, offerings) ||
                 const DeepCollectionEquality()
                     .equals(other.offerings, offerings)));
@@ -141,9 +124,7 @@ class _$_PurchaseState extends _PurchaseState {
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(purchaserInfo) ^
-      const DeepCollectionEquality().hash(offerings);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(offerings);
 
   @JsonKey(ignore: true)
   @override
@@ -152,12 +133,9 @@ class _$_PurchaseState extends _PurchaseState {
 }
 
 abstract class _PurchaseState extends PurchaseState {
-  factory _PurchaseState({PurchaserInfo? purchaserInfo, Offerings? offerings}) =
-      _$_PurchaseState;
+  factory _PurchaseState({Offerings? offerings}) = _$_PurchaseState;
   _PurchaseState._() : super._();
 
-  @override
-  PurchaserInfo? get purchaserInfo => throw _privateConstructorUsedError;
   @override
   Offerings? get offerings => throw _privateConstructorUsedError;
   @override
