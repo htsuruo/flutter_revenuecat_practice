@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_revenuecat_practice/logger.dart';
 import 'package:flutter_revenuecat_practice/model/purchase_state.dart';
-import 'package:flutter_revenuecat_practice/model/user_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:subscription_holder/subscription_holder.dart';
@@ -30,14 +29,6 @@ class PurchaseController extends StateNotifier<PurchaseState>
         state = state.copyWith(offerings: null);
       }
     });
-
-    // リスナーも提供されている
-    Purchases.addPurchaserInfoUpdateListener(
-      (purchaserInfo) {
-        logger.info('purchaserInfo: $purchaserInfo');
-        _read(userProvider.notifier).updatePurchaseInfo(purchaserInfo);
-      },
-    );
   }
 
   final Reader _read;

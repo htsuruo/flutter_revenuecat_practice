@@ -13,6 +13,16 @@ final userProvider = StateNotifierProvider<UserController, UserState>(
 class UserController extends StateNotifier<UserState>
     with SubscriptionHolderMixin {
   UserController() : super(UserState()) {
+    // リスナーも提供されている
+    Purchases.addPurchaserInfoUpdateListener(
+      (purchaserInfo) {
+        logger.info('purchaserInfo: $purchaserInfo');
+        state = state.copyWith(
+          purchaserInfo: purchaserInfo,
+        );
+      },
+    );
+
     subscriptionHolder.add(
       _auth.authStateChanges().listen(
         (user) async {
@@ -21,20 +31,16 @@ class UserController extends StateNotifier<UserState>
             state = UserState();
             return;
           }
-          state = state.copyWith(user: user);
           // RevenueCatのAppUserIDをセット
           final loginResult = await Purchases.logIn(user.uid);
-          updatePurchaseInfo(loginResult.purchaserInfo);
+          state = state.copyWith(
+            user: user,
+            purchaserInfo: loginResult.purchaserInfo,
+          );
         },
       ),
     );
   }
 
   final _auth = FirebaseAuth.instance;
-
-  void updatePurchaseInfo(PurchaserInfo purchaserInfo) {
-    state = state.copyWith(
-      purchaserInfo: purchaserInfo,
-    );
-  }
 }
