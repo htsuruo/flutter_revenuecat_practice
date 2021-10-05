@@ -2,10 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_revenuecat_practice/logger.dart';
 import 'package:flutter_revenuecat_practice/model/model.dart';
-import 'package:flutter_revenuecat_practice/model/user_controller.dart';
 import 'package:flutter_revenuecat_practice/scaffold_messanger_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
+
+import 'controller/controller.dart';
 
 class SimplePurchasePage extends ConsumerWidget {
   const SimplePurchasePage({Key? key}) : super(key: key);
