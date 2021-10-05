@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_revenuecat_practice/model/user_state.dart';
+import 'package:flutter_revenuecat_practice/controller/controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:subscription_holder/subscription_holder.dart';
