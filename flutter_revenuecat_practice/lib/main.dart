@@ -23,10 +23,10 @@ Future<void> main() async {
     );
   }
 
+  // RevenueCat SDKのログ表示(ドキュメント見るとsetupより先に呼んでいる）
+  await Purchases.setDebugLogsEnabled(kDebugMode);
   // API Keyでセットアップ
   await Purchases.setup(apiKey);
-  // RevenueCat SDKのログ表示
-  await Purchases.setDebugLogsEnabled(kDebugMode);
   runApp(
     const ProviderScope(
       child: App(),

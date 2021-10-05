@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_revenuecat_practice/logger.dart';
 import 'package:flutter_revenuecat_practice/model/model.dart';
+import 'package:flutter_revenuecat_practice/scaffold_messanger_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 class SimplePurchasePage extends ConsumerWidget {
@@ -16,7 +16,6 @@ class SimplePurchasePage extends ConsumerWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final user = ref.watch(authenticator);
-    final purchase = ref.watch(purchaseStateProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Purchase Demo'),
@@ -38,12 +37,12 @@ class SimplePurchasePage extends ConsumerWidget {
             child: Text('uid: ${user?.uid}'),
           ),
           Expanded(
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (user == null)
-                    OutlinedButton(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (user == null)
+                  Center(
+                    child: OutlinedButton(
                       onPressed: () async {
                         final userCredential = await ref
                             .read(progressController)
@@ -54,19 +53,47 @@ class SimplePurchasePage extends ConsumerWidget {
                       },
                       child: const Text('Google Sign in'),
                     ),
-                  if (user != null)
-                    OutlinedButton(
-                      onPressed: () async {
-                        await Purchases.purchaseProduct('test_product_id');
-                      },
-                      child: const Text('HOGE'),
-                    ),
-                ],
-              ),
+                  ),
+                if (user != null) const _PurchaseArea(),
+              ],
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+class _PurchaseArea extends ConsumerWidget {
+  const _PurchaseArea({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final products = ref.watch(purchaseStateProvider.select((s) => s.products));
+    return products == null
+        ? const Center(child: CircularProgressIndicator())
+        : Column(
+            children: products
+                .map(
+                  (p) => ListTile(
+                    title: Text(p.title),
+                    subtitle: Text(p.identifier),
+                    trailing: Text(p.priceString),
+                    onTap: () async {
+                      // 購入
+                      final res = await ref
+                          .read(purchaseStateProvider.notifier)
+                          .purchaseProduct(p.identifier);
+                      if (res != null) {
+                        ref.read(scaffoldMessengerProvider).currentState!
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(
+                            SnackBar(content: Text(res.message!)),
+                          );
+                      }
+                    },
+                  ),
+                )
+                .toList(),
+          );
   }
 }

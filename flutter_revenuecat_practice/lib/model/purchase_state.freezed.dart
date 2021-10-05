@@ -17,14 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PurchaseStateTearOff {
   const _$PurchaseStateTearOff();
 
-  _PurchaseState call(
-      {PurchaserInfo? purchaserInfo,
-      Offerings? offerings,
-      List<Product>? products}) {
+  _PurchaseState call({PurchaserInfo? purchaserInfo, Offerings? offerings}) {
     return _PurchaseState(
       purchaserInfo: purchaserInfo,
       offerings: offerings,
-      products: products,
     );
   }
 }
@@ -36,7 +32,6 @@ const $PurchaseState = _$PurchaseStateTearOff();
 mixin _$PurchaseState {
   PurchaserInfo? get purchaserInfo => throw _privateConstructorUsedError;
   Offerings? get offerings => throw _privateConstructorUsedError;
-  List<Product>? get products => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PurchaseStateCopyWith<PurchaseState> get copyWith =>
@@ -48,10 +43,7 @@ abstract class $PurchaseStateCopyWith<$Res> {
   factory $PurchaseStateCopyWith(
           PurchaseState value, $Res Function(PurchaseState) then) =
       _$PurchaseStateCopyWithImpl<$Res>;
-  $Res call(
-      {PurchaserInfo? purchaserInfo,
-      Offerings? offerings,
-      List<Product>? products});
+  $Res call({PurchaserInfo? purchaserInfo, Offerings? offerings});
 }
 
 /// @nodoc
@@ -67,7 +59,6 @@ class _$PurchaseStateCopyWithImpl<$Res>
   $Res call({
     Object? purchaserInfo = freezed,
     Object? offerings = freezed,
-    Object? products = freezed,
   }) {
     return _then(_value.copyWith(
       purchaserInfo: purchaserInfo == freezed
@@ -78,10 +69,6 @@ class _$PurchaseStateCopyWithImpl<$Res>
           ? _value.offerings
           : offerings // ignore: cast_nullable_to_non_nullable
               as Offerings?,
-      products: products == freezed
-          ? _value.products
-          : products // ignore: cast_nullable_to_non_nullable
-              as List<Product>?,
     ));
   }
 }
@@ -93,10 +80,7 @@ abstract class _$PurchaseStateCopyWith<$Res>
           _PurchaseState value, $Res Function(_PurchaseState) then) =
       __$PurchaseStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {PurchaserInfo? purchaserInfo,
-      Offerings? offerings,
-      List<Product>? products});
+  $Res call({PurchaserInfo? purchaserInfo, Offerings? offerings});
 }
 
 /// @nodoc
@@ -114,7 +98,6 @@ class __$PurchaseStateCopyWithImpl<$Res>
   $Res call({
     Object? purchaserInfo = freezed,
     Object? offerings = freezed,
-    Object? products = freezed,
   }) {
     return _then(_PurchaseState(
       purchaserInfo: purchaserInfo == freezed
@@ -125,29 +108,23 @@ class __$PurchaseStateCopyWithImpl<$Res>
           ? _value.offerings
           : offerings // ignore: cast_nullable_to_non_nullable
               as Offerings?,
-      products: products == freezed
-          ? _value.products
-          : products // ignore: cast_nullable_to_non_nullable
-              as List<Product>?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PurchaseState implements _PurchaseState {
-  const _$_PurchaseState({this.purchaserInfo, this.offerings, this.products});
+class _$_PurchaseState extends _PurchaseState {
+  _$_PurchaseState({this.purchaserInfo, this.offerings}) : super._();
 
   @override
   final PurchaserInfo? purchaserInfo;
   @override
   final Offerings? offerings;
-  @override
-  final List<Product>? products;
 
   @override
   String toString() {
-    return 'PurchaseState(purchaserInfo: $purchaserInfo, offerings: $offerings, products: $products)';
+    return 'PurchaseState(purchaserInfo: $purchaserInfo, offerings: $offerings)';
   }
 
   @override
@@ -159,18 +136,14 @@ class _$_PurchaseState implements _PurchaseState {
                     .equals(other.purchaserInfo, purchaserInfo)) &&
             (identical(other.offerings, offerings) ||
                 const DeepCollectionEquality()
-                    .equals(other.offerings, offerings)) &&
-            (identical(other.products, products) ||
-                const DeepCollectionEquality()
-                    .equals(other.products, products)));
+                    .equals(other.offerings, offerings)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(purchaserInfo) ^
-      const DeepCollectionEquality().hash(offerings) ^
-      const DeepCollectionEquality().hash(products);
+      const DeepCollectionEquality().hash(offerings);
 
   @JsonKey(ignore: true)
   @override
@@ -178,18 +151,15 @@ class _$_PurchaseState implements _PurchaseState {
       __$PurchaseStateCopyWithImpl<_PurchaseState>(this, _$identity);
 }
 
-abstract class _PurchaseState implements PurchaseState {
-  const factory _PurchaseState(
-      {PurchaserInfo? purchaserInfo,
-      Offerings? offerings,
-      List<Product>? products}) = _$_PurchaseState;
+abstract class _PurchaseState extends PurchaseState {
+  factory _PurchaseState({PurchaserInfo? purchaserInfo, Offerings? offerings}) =
+      _$_PurchaseState;
+  _PurchaseState._() : super._();
 
   @override
   PurchaserInfo? get purchaserInfo => throw _privateConstructorUsedError;
   @override
   Offerings? get offerings => throw _privateConstructorUsedError;
-  @override
-  List<Product>? get products => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PurchaseStateCopyWith<_PurchaseState> get copyWith =>
