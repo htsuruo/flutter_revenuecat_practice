@@ -32,18 +32,19 @@ class PurchaseController extends StateNotifier<PurchaseState>
   }
 
   final Reader _read;
-  Future<PlatformException?> purchaseProduct(String productId) async {
+  Future<PurchasesErrorCode?> purchaseProduct(String productId) async {
     try {
       await Purchases.purchaseProduct(productId);
       return null;
     } on PlatformException catch (e) {
       // 購入キャンセル
-      logger.warning(e);
-      return e;
+      final errorCode = PurchasesErrorHelper.getErrorCode(e);
+      logger.warning(errorCode);
+      return errorCode;
     }
   }
 
-  Future<PlatformException?> restore() async {
+  Future<PurchasesErrorCode?> restore() async {
     try {
       await Purchases.restoreTransactions();
       // ... check restored purchaserInfo to see if entitlement is now active
@@ -58,8 +59,9 @@ class PurchaseController extends StateNotifier<PurchaseState>
       // [Purchases] - WARN: ⚠️ /Users/tsuruoka/github/flutter_revenuecat_practice/flutter_revenuecat_practice/ios/Pods/PurchasesCoreSwift/PurchasesCoreSwift/LocalReceiptParsing/ReceiptParser.swift-receiptHasTransactions(receiptData:): Could not parse receipt, conservatively returning true
     } on PlatformException catch (e) {
       // Error restoring purchases
-      logger.warning(e);
-      return e;
+      final errorCode = PurchasesErrorHelper.getErrorCode(e);
+      logger.warning(errorCode);
+      return errorCode;
     }
   }
 }

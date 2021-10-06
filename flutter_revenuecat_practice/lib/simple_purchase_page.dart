@@ -153,15 +153,19 @@ class _PurchaseArea extends ConsumerWidget {
                       trailing: Text(p.priceString),
                       onTap: () async {
                         // 購入
-                        final exception = await ref
-                            .read(purchaseProvider.notifier)
-                            .purchaseProduct(p.identifier);
-                        if (exception != null) {
+                        final errorCode = await ref
+                            .read(progressController)
+                            .executeWithProgress(
+                              () => ref
+                                  .read(purchaseProvider.notifier)
+                                  .purchaseProduct(p.identifier),
+                            );
+                        if (errorCode != null) {
                           ref
                               .read(scaffoldMessengerProvider)
                               .currentState!
                               .showAfterRemoveSnackBar(
-                                  message: exception.message!);
+                                  message: errorCode.described);
                         }
                       },
                     );
@@ -175,20 +179,24 @@ class _PurchaseArea extends ConsumerWidget {
                   label: const Text('Restore'),
                   onPressed: () async {
                     // 購入状態を復元
-                    final exception =
-                        await ref.read(purchaseProvider.notifier).restore();
-                    if (exception != null) {
+                    final errorCode =
+                        await ref.read(progressController).executeWithProgress(
+                              () =>
+                                  ref.read(purchaseProvider.notifier).restore(),
+                            );
+                    if (errorCode != null) {
                       // error
                       ref
                           .read(scaffoldMessengerProvider)
                           .currentState!
-                          .showAfterRemoveSnackBar(message: exception.message!);
+                          .showAfterRemoveSnackBar(
+                              message: errorCode.described);
                     } else {
                       ref
                           .read(scaffoldMessengerProvider)
                           .currentState!
                           .showAfterRemoveSnackBar(
-                            message: 'Refreshed success',
+                            message: 'Restore success',
                           );
                     }
                   },
