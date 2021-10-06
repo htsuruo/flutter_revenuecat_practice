@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:subscription_holder/subscription_holder.dart';
 
-final purchaseStateProvider =
+final purchaseProvider =
     StateNotifierProvider<PurchaseController, PurchaseState>(
   (ref) => PurchaseController(ref.read),
 );
@@ -38,6 +38,26 @@ class PurchaseController extends StateNotifier<PurchaseState>
       return null;
     } on PlatformException catch (e) {
       // 購入キャンセル
+      logger.warning(e);
+      return e;
+    }
+  }
+
+  Future<PlatformException?> restore() async {
+    try {
+      await Purchases.restoreTransactions();
+      // ... check restored purchaserInfo to see if entitlement is now active
+
+      // TODO(tsuruoka): 購入状態（レシート）が見つからない場合には、Exceptionではなくネイティブ側のログが表示される程度なので分岐ができない
+      // 購入状態の成功or失敗の判定ができない（同期ボタンという解釈で「更新しました」のSnackBarを表示するのでも十分かも）
+      // [Purchases] - WARN: ⚠️ allowSharingAppStoreAccount is set to false and restoreTransactions has been called.
+      // Are you sure you want to do this?
+      // [Purchases] - DEBUG: ℹ️ Force refreshing the receipt to get latest transactions from Apple.
+      // [Purchases] - DEBUG: ℹ️ Loaded receipt from url file:///private/var/mobile/Containers/Data/Application/95D3F798-98D6-4B2B-9C40-4B8EDDFC6186/StoreKit/sandboxReceipt
+      // [Purchases] - INFO: ℹ️ Parsing receipt
+      // [Purchases] - WARN: ⚠️ /Users/tsuruoka/github/flutter_revenuecat_practice/flutter_revenuecat_practice/ios/Pods/PurchasesCoreSwift/PurchasesCoreSwift/LocalReceiptParsing/ReceiptParser.swift-receiptHasTransactions(receiptData:): Could not parse receipt, conservatively returning true
+    } on PlatformException catch (e) {
+      // Error restoring purchases
       logger.warning(e);
       return e;
     }

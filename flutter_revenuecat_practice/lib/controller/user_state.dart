@@ -23,4 +23,7 @@ class UserState with _$UserState {
   // Entitlements`NoAds`を購入した状態
   late final bool isNoAdsUser =
       purchaserInfo?.entitlements.all['NoAds']?.isActive ?? false;
+
+  // 複数のPackagesのうちいずれか一つでも購入/購読している状態
+  late final String? appUserId = purchaserInfo?.originalAppUserId;
 }

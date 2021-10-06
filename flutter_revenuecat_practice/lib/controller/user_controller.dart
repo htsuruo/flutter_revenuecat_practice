@@ -23,15 +23,6 @@ class UserController extends StateNotifier<UserState>
       },
     );
 
-    Purchases.removePurchaserInfoUpdateListener(
-      (purchaserInfo) {
-        logger.info('purchaserInfo: $purchaserInfo');
-        state = state.copyWith(
-          purchaserInfo: purchaserInfo,
-        );
-      },
-    );
-
     subscriptionHolder.add(
       _auth.authStateChanges().listen(
         (user) async {

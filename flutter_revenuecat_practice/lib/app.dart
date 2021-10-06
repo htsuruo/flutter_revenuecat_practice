@@ -5,10 +5,6 @@ import 'package:flutter_revenuecat_practice/simple_purchase_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
-// final _routes = <String, WidgetBuilder>{
-//   SimpleRevenueCatPage.routeName: (context) => const SimpleRevenueCatPage(),
-// };
-
 const _title = 'Flutter RevenueCat Demo';
 
 class App extends ConsumerWidget {
@@ -25,6 +21,7 @@ class App extends ConsumerWidget {
         snackBarTheme: const SnackBarThemeData(
           behavior: SnackBarBehavior.floating,
         ),
+        dividerTheme: const DividerThemeData(space: 0),
       ),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
