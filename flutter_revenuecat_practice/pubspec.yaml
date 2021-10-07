@@ -38,6 +38,7 @@ dependencies:
   flutter_riverpod: 1.0.0-dev.7
   gap:
   google_sign_in:
+  in_app_purchase:
   purchases_flutter:
   simple_logger:
   subscription_holder:
