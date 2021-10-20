@@ -21,3 +21,6 @@ class PurchaseState with _$PurchaseState {
 
 // TODO(tsuruoka): 本来は`bundle ID`を取得する実装をするとベター
 const _identifier = 'com.tsuruoka.flutterRevenueCatPractice.monthly';
+
+// キャメルケースで作ったがAndroidはスネークケースしか作成できないことにあとから気づいた..
+// const _identifier = 'com.tsuruoka.flutter_revenuecat_practice.monthly';

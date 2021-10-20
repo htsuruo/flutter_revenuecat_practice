@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_revenuecat_practice/app.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:intl/intl.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:simple_logger/simple_logger.dart';
@@ -31,6 +32,12 @@ Future<void> main() async {
   await Purchases.setDebugLogsEnabled(kDebugMode);
   // API Keyでセットアップ
   await Purchases.setup(apiKey);
+
+  // ref. https://pub.dev/packages/in_app_purchase/changelog#060
+  // これをしないと下記Assertに引っかかる
+  // enablePendingPurchases() must be called when initializing the application
+  // 明示的な`in_app_purchase_android`のimportが必要
+  InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
 
   runApp(
     const ProviderScope(
