@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_revenuecat_practice/controller/controller.dart';
 import 'package:flutter_revenuecat_practice/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:subscription_holder/subscription_holder.dart';
 
@@ -29,6 +30,21 @@ class PurchaseController extends StateNotifier<PurchaseState>
         state = state.copyWith(offerings: null);
       }
     });
+
+    // `PurchaseStatus`が`purchased`か`restore`のときのみバックアップを取る
+    subscriptionHolder.add(
+      InAppPurchase.instance.purchaseStream
+          .map((purchaseDetails) =>
+              purchaseDetails.where((p) => p.status != PurchaseStatus.pending))
+          .listen(
+        (purchaseDetails) {
+          for (final detail in purchaseDetails) {
+            final data = detail.verificationData.serverVerificationData;
+            logger.fine(data);
+          }
+        },
+      ),
+    );
   }
 
   final Reader _read;

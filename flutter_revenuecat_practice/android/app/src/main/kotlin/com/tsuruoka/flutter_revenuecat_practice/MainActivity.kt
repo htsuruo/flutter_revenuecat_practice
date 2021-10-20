@@ -1,4 +1,4 @@
-package com.tsuruoka.flutter_revenuecat_practice
+package com.tsuruoka.flutterRevenuecatPractice
 
 import io.flutter.embedding.android.FlutterActivity
 
