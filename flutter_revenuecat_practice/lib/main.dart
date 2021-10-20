@@ -31,6 +31,7 @@ Future<void> main() async {
   await Purchases.setDebugLogsEnabled(kDebugMode);
   // API Keyでセットアップ
   await Purchases.setup(apiKey);
+
   runApp(
     const ProviderScope(
       child: App(),
